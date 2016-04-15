@@ -849,13 +849,14 @@ class APIv1Endpoint {
 
       formatBody: function(options) {
         return function(body) {
-          if (body.data && body.data.children && body.data.children[0]) {
+          const { data } = body;
+          if (data && data.children && data.children[0]) {
             if (options.id) {
-              return new Link(body.data.children[0].data).toJSON();
+              return new Link(data.children[0].data).toJSON();
             } else {
-              return body.data.children.map(c => new Link(c.data).toJSON());
+              return data.children.map(c => new Link(c.data).toJSON());
             }
-          } else if (body.data.children) {
+          } else if (data) {
             return [];
           }
         };
