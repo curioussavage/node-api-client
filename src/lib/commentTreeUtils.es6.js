@@ -55,7 +55,7 @@ const COMMENT_DEFAULTS = {
 
 export function normalizeCommentReplies(comments, isTopLevel, visitComment) {
   return comments.map(comment => {
-    if (comment.type === COMMENT_LOAD_MORE) { return; }
+    if (comment.type === COMMENT_LOAD_MORE) { return visitComment(comment, isTopLevel); }
 
     // assign some helpful keys and their defaults to the comment
     Object.assign(comment, COMMENT_DEFAULTS);

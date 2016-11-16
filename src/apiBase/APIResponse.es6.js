@@ -63,6 +63,7 @@ export class APIResponseBase {
 
   makeRecord(model) {
     if (model.toRecord) { return model.toRecord(); }
+    if (model.type === 'comment_load_more') { return model; } 
     const { uuid } = model;
     if (!uuid) { return; }
 

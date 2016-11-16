@@ -12,6 +12,8 @@ import {
   normalizeCommentReplies,
 } from '../lib/commentTreeUtils';
 
+import { COMMENT_LOAD_MORE } from '../models2/thingTypes';
+
 const formatQuery = (query, method) => {
   formatBaseContentQuery(query, method);
 
@@ -63,6 +65,10 @@ const parseGetBody = (apiResponse, hasChildren) => {
   normalizeCommentReplies(comments, true, (commentJSON, isTopLevel) => {
     // parsing is done bottom up, comment models are immutable
     // but they'll rely on the records
+    if (commentJSON.type === COMMENT_LOAD_MORE) { 
+      apiResponse.addResult(commentJSON);
+      return commentJSON;
+    }
     const comment = CommentModel.fromJSON(commentJSON);
 
     if (isTopLevel) {
