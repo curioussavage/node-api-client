@@ -73,6 +73,7 @@ export default class PostModel extends RedditModel {
     expandable: T.bool,
     expandedContent: T.html,
     preview: T.nop, // it's in data as well but we want to transform it
+    disableComments: T.bool,
   };
 
   static API_ALIASES = {
@@ -106,6 +107,7 @@ export default class PostModel extends RedditModel {
     sendreplies: 'sendReplies',
     url: 'cleanUrl',
     user_reports: 'userReports',
+    disable_comments: 'disableComments',
   };
 
   // Note: derived properties operate on the json passed to
